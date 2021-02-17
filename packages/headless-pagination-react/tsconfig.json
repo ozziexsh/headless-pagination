@@ -10,7 +10,6 @@
     "skipLibCheck": true,
     "strict": true,
     "forceConsistentCasingInFileNames": true,
-    "noEmit": true,
     "esModuleInterop": true,
     "module": "esnext",
     "moduleResolution": "node",
@@ -19,10 +18,13 @@
     "noImplicitAny": true,
     "noUnusedLocals": true,
     "noFallthroughCasesInSwitch": true,
-    "strictNullChecks": true
+    "strictNullChecks": true,
+    "declaration": true,
+    "emitDeclarationOnly": true,
+    "outDir": "dist/"
   },
   "include": [
-    "**/*.ts",
+    "src/**/*.ts",
   ],
   "exclude": [
     "node_modules"

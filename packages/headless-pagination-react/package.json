@@ -1,0 +1,24 @@
+{
+  "name": "headless-pagination-react",
+  "version": "0.0.1",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build": "vite build && npx typescript -p ."
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "headless-pagination": "^0.0.1"
+  },
+  "peerDependencies": {
+    "react": ">=17"
+  },
+  "devDependencies": {
+    "@types/react": "^17.0.2",
+    "react": "^17.0.1",
+    "typescript": "^4.1.5",
+    "vite": "^2.0.0"
+  }
+}

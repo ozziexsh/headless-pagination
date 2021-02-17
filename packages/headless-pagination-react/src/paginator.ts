@@ -1,7 +1,5 @@
 import { useState, useRef } from 'react';
-import Paginator, {
-  PaginatorOptions,
-} from '../../headless-pagination/src/paginator';
+import Paginator, { PaginatorOptions } from 'headless-pagination';
 
 export default function usePagination(options: PaginatorOptions) {
   const paginator = useRef(new Paginator(options));

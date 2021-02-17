@@ -7,12 +7,13 @@ export default function usePagination(options: PaginatorOptions) {
 
   function getStateFromPaginator() {
     return {
-      page: paginator.current.page,
+      page: paginator.current.page(),
       links: paginator.current.links(),
       hasNext: paginator.current.hasNext(),
       hasPrevious: paginator.current.hasPrevious(),
       from: paginator.current.from(),
       to: paginator.current.to(),
+      totalPages: paginator.current.totalPages(),
     };
   }
 

@@ -1,6 +1,6 @@
 {
   "name": "headless-pagination-react",
-  "version": "0.1.3",
+  "version": "0.1.4",
   "description": "Headless pagination library for react with hooks",
   "author": "Ozzie Neher @ozziexsh",
   "license": "MIT",

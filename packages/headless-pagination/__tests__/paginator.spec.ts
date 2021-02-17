@@ -12,9 +12,9 @@ describe('Paginator', () => {
       expect(paginator.hasNext()).toBeFalsy();
       expect(paginator.hasPrevious()).toBeFalsy();
       paginator.onNext();
-      expect(paginator.page).toEqual(1);
+      expect(paginator.page()).toEqual(1);
       paginator.onPrevious();
-      expect(paginator.page).toEqual(1);
+      expect(paginator.page()).toEqual(1);
     });
     it('should navigate between pages', () => {
       const paginator = new Paginator({
@@ -28,13 +28,13 @@ describe('Paginator', () => {
       expect(paginator.hasNext()).toBeTruthy();
       expect(paginator.hasPrevious()).toBeFalsy();
       paginator.onNext();
-      expect(paginator.page).toEqual(2);
+      expect(paginator.page()).toEqual(2);
       expect(paginator.links()).toEqual([
         { label: 1, active: false, disabled: false },
         { label: 2, active: true, disabled: false },
       ]);
       paginator.onPrevious();
-      expect(paginator.page).toEqual(1);
+      expect(paginator.page()).toEqual(1);
     });
   });
 

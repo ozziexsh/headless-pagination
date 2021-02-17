@@ -19,10 +19,10 @@ export interface PaginatorLink {
 }
 
 export default class Paginator {
-  public page: number;
-  private perPage: number;
-  private maxLinks: number;
-  private totalItems: number;
+  private currentPage: number = 1;
+  private perPage: number = 24;
+  private maxLinks: number = 7;
+  private totalItems: number = 0;
   private numTrailingLinks: number;
 
   constructor({
@@ -31,11 +31,15 @@ export default class Paginator {
     maxLinks = 7,
     totalItems,
   }: PaginatorOptions) {
-    this.page = initialPage;
-    this.perPage = perPage;
-    this.maxLinks = maxLinks;
-    this.totalItems = totalItems;
+    this.setTotalItems(totalItems);
+    this.setPerPage(perPage);
+    this.setMaxLinks(maxLinks);
+    this.setPage(initialPage);
     this.numTrailingLinks = 2;
+  }
+
+  public page() {
+    return this.currentPage;
   }
 
   public totalPages() {
@@ -43,19 +47,19 @@ export default class Paginator {
   }
 
   public hasNext() {
-    return this.page !== this.totalPages();
+    return this.currentPage !== this.totalPages();
   }
 
   public hasPrevious() {
-    return this.page > 1;
+    return this.currentPage > 1;
   }
 
   public from() {
-    return this.page * this.perPage - this.perPage + 1;
+    return this.currentPage * this.perPage - this.perPage + 1;
   }
 
   public to() {
-    return this.page * this.perPage;
+    return this.currentPage * this.perPage;
   }
 
   private display() {
@@ -66,14 +70,14 @@ export default class Paginator {
     // 1 2 3 4 5 ... 42
     //       ^
     // if page is at most second to last while in left side state
-    if (this.page <= this.maxLinks - this.numTrailingLinks - 1) {
+    if (this.currentPage <= this.maxLinks - this.numTrailingLinks - 1) {
       return PaginatorDisplay.LeftVisible;
     }
     // 1 ... 4 5 6 ... 42
     //         ^
     if (
-      this.page >= this.maxLinks - this.numTrailingLinks &&
-      this.page + (this.maxLinks - this.numTrailingLinks * 2) <
+      this.currentPage >= this.maxLinks - this.numTrailingLinks &&
+      this.currentPage + (this.maxLinks - this.numTrailingLinks * 2) <
         this.totalPages()
     ) {
       return PaginatorDisplay.MiddleSpread;
@@ -84,27 +88,57 @@ export default class Paginator {
   }
 
   public onNext() {
-    if (this.page === this.totalPages()) {
+    if (this.currentPage === this.totalPages()) {
       return;
     }
-    this.page += 1;
+    this.currentPage += 1;
   }
 
   public onPrevious() {
-    if (this.page === 1) {
+    if (this.currentPage === 1) {
       return;
     }
-    this.page -= 1;
+    this.currentPage -= 1;
   }
 
   public setPage(newPage: number) {
-    this.page = newPage;
+    if (newPage >= this.totalPages()) {
+      this.currentPage = this.totalPages();
+    } else if (newPage <= 1) {
+      this.currentPage = 1;
+    } else {
+      this.currentPage = newPage;
+    }
+  }
+
+  public setMaxLinks(newMaxLinks: number) {
+    if (newMaxLinks <= 1) {
+      this.maxLinks = 1;
+    } else {
+      this.maxLinks = newMaxLinks;
+    }
+  }
+
+  public setPerPage(newPerPage: number) {
+    if (newPerPage <= 1) {
+      this.perPage = 1;
+    } else {
+      this.perPage = newPerPage;
+    }
+  }
+
+  public setTotalItems(newTotalItems: number) {
+    if (newTotalItems <= 0) {
+      this.totalItems = 0;
+    } else {
+      this.totalItems = newTotalItems;
+    }
   }
 
   private formatLink(link: number | string) {
     return {
       label: link,
-      active: link === this.page,
+      active: link === this.currentPage,
       disabled: typeof link === 'string',
     };
   }
@@ -132,8 +166,8 @@ export default class Paginator {
           const numIterations = this.maxLinks - this.numTrailingLinks * 2;
           const spot = Math.ceil(numIterations / 2);
           for (
-            let i = this.page - spot + 1;
-            i < this.page + numIterations - spot + 1;
+            let i = this.currentPage - spot + 1;
+            i < this.currentPage + numIterations - spot + 1;
             i++
           ) {
             links.push(this.formatLink(i));

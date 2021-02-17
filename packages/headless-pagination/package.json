@@ -1,7 +1,7 @@
 {
   "name": "headless-pagination",
   "description": "Vanilla JS headless pagination library",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "author": "Ozzie Neher @ozziexsh",
   "license": "MIT",
   "homepage": "https://github.com/ozziexsh/headless-pagination/tree/master/packages/headless-pagination",

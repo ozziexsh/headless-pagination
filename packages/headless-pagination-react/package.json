@@ -1,12 +1,15 @@
 {
   "name": "headless-pagination-react",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Headless pagination library for react with hooks",
   "author": "Ozzie Neher @ozziexsh",
   "license": "MIT",
   "homepage": "https://github.com/ozziexsh/headless-pagination/tree/master/packages/headless-pagination-react",
   "bugs": "https://github.com/ozziexsh/headless-pagination/issues",
   "repository": "ozziexsh/headless-pagination",
+  "files": [
+    "./dist/**/*"
+  ],
   "scripts": {
     "build": "vite build && npx typescript -p ."
   },

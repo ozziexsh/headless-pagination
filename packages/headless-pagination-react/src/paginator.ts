@@ -1,4 +1,4 @@
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import Paginator, { PaginatorOptions } from 'headless-pagination';
 
 export default function usePagination(options: PaginatorOptions) {
@@ -34,6 +34,19 @@ export default function usePagination(options: PaginatorOptions) {
     paginator.current.setPage(newPage);
     setStateFromPaginator();
   }
+
+  useEffect(() => {
+    if (typeof options.maxLinks !== 'undefined') {
+      paginator.current.setMaxLinks(options.maxLinks);
+    }
+    if (typeof options.perPage !== 'undefined') {
+      paginator.current.setPerPage(options.perPage);
+    }
+    if (typeof options.totalItems !== 'undefined') {
+      paginator.current.setTotalItems(options.totalItems);
+    }
+    setStateFromPaginator();
+  }, [options.maxLinks, options.perPage, options.totalItems]);
 
   return {
     ...state,

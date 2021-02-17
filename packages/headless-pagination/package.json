@@ -1,6 +1,12 @@
 {
   "name": "headless-pagination",
-  "version": "0.0.1",
+  "description": "Vanilla JS headless pagination library",
+  "version": "0.1.0",
+  "author": "Ozzie Neher @ozziexsh",
+  "license": "MIT",
+  "homepage": "https://github.com/ozziexsh/headless-pagination/tree/master/packages/headless-pagination",
+  "bugs": "https://github.com/ozziexsh/headless-pagination/issues",
+  "repository": "ozziexsh/headless-pagination",
   "scripts": {
     "build": "vite build && npx typescript -p .",
     "test": "jest"

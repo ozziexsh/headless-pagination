@@ -5,20 +5,17 @@ function App() {
   const [totalItems, setTotalItems] = useState(1000);
   const [perPage, setPerPage] = useState(24);
   const [maxLinks, setMaxLinks] = useState(7);
-  const {
-    links,
-    from,
-    to,
-    setPage,
-    hasNext,
-    hasPrevious,
-    onNext,
-    onPrevious,
-  } = usePagination({
-    totalItems,
-    perPage,
-    maxLinks,
-  });
+  const { links, from, to, setPage, hasNext, hasPrevious, onNext, onPrevious } =
+    usePagination({
+      totalItems,
+      perPage,
+      maxLinks,
+    });
+
+  function clampValue(e: React.FormEvent<HTMLInputElement>, min = 1) {
+    const value = Number(e.currentTarget.value);
+    return value < min ? min : value;
+  }
 
   return (
     <div className={'max-w-4xl mx-auto'}>
@@ -35,7 +32,7 @@ function App() {
       </div>
       <div
         className={
-          'mt-6 flex flex-col md:flex-row md:items-center md:justify-center space-y-2 md:space-x-2'
+          'mt-6 flex flex-col md:flex-row md:items-center md:justify-center space-y-2 md:space-y-0 md:space-x-2'
         }
       >
         <div>
@@ -46,7 +43,7 @@ function App() {
             type="number"
             id="total-items"
             value={totalItems}
-            onChange={e => setTotalItems(Number(e.currentTarget.value))}
+            onChange={e => setTotalItems(clampValue(e))}
             className={'rounded-md px-4 py-2 border-solid border-gray-300'}
           />
         </div>
@@ -58,7 +55,7 @@ function App() {
             type="number"
             id="per-page"
             value={perPage}
-            onChange={e => setPerPage(Number(e.currentTarget.value))}
+            onChange={e => setPerPage(clampValue(e))}
             className={'rounded-md px-4 py-2 border-solid border-gray-300'}
           />
         </div>
@@ -70,7 +67,7 @@ function App() {
             type="number"
             id="max-links"
             value={maxLinks}
-            onChange={e => setMaxLinks(Number(e.currentTarget.value))}
+            onChange={e => setMaxLinks(clampValue(e, 7))}
             className={'rounded-md px-4 py-2 border-solid border-gray-300'}
           />
         </div>

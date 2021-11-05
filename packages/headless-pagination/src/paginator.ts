@@ -59,7 +59,11 @@ export default class Paginator {
   }
 
   public to() {
-    return this.currentPage * this.perPage;
+    const to = this.currentPage * this.perPage;
+    if (to > this.totalItems) {
+      return this.totalItems;
+    }
+    return to;
   }
 
   private display() {
@@ -112,8 +116,8 @@ export default class Paginator {
   }
 
   public setMaxLinks(newMaxLinks: number) {
-    if (newMaxLinks <= 1) {
-      this.maxLinks = 1;
+    if (newMaxLinks <= 7) {
+      this.maxLinks = 7;
     } else {
       this.maxLinks = newMaxLinks;
     }

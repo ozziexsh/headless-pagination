@@ -29,7 +29,7 @@ const paginator = new Paginator({
   totalItems: 1000, // required
   initialPage: 1, // optional (default shown), page to show at start
   perPage: 24, // optional (default shown), how many items you're showing per page
-  maxLinks: 7, // optional (default shown), max number of pagination links to show
+  maxLinks: 7, // optional (default shown, min value of 7), max number of pagination links to show
 });
 ```
 
@@ -98,7 +98,7 @@ const paginator = new Paginator({
 console.log(paginator.from());
 ```
 
-### `from()`
+### `to()`
 
 Ending item we're currently displaying based on page offset. Useful for showing a message like `Showing 24 to 50 results of 100`.
 
